@@ -64,13 +64,8 @@ export const updateUser = async (id, userData) => {
     //PUT con la ID del usuario y el objeto userData con la información a actualizar
     const response = await API.put(`/users/${id}`, userData);
     
-    // En lugar de retornar solo response.data, retornamos un objeto
-    return {
-      data: response.data, // Array de usuarios
-      total: response.data.length, // Total basado en la longitud del array
-      page: parseInt(params._page || 1),
-      limit: parseInt(params._limit || 10),
-    };
+    // repuesta con usuario actualizado
+    return response.data;
     
   } catch (error) {
     
