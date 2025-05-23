@@ -1,0 +1,55 @@
+/* Estilos para filas de tabla alternadas */
+.table-row-light {
+  background-color: #fafafa;
+}
+
+.table-row-dark {
+  background-color: #ffffff;
+}
+
+/* Hover effects para mejor UX */
+.table-row-light:hover,
+.table-row-dark:hover {
+  background-color: #e6f7ff !important;
+}
+
+/* Estilos para loaders personalizados */
+.custom-loader {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 40px;
+}
+
+/* Responsividad para dispositivos móviles */
+@media (max-width: 768px) {
+  .ant-table-scroll {
+    overflow-x: auto;
+  }
+  
+  .ant-card {
+    margin: 8px !important;
+  }
+  
+  .ant-col {
+    margin-bottom: 16px;
+  }
+}
+
+/* Mejoras de accesibilidad */
+.ant-btn:focus,
+.ant-input:focus,
+.ant-select:focus {
+  outline: 2px solid #1890ff;
+  outline-offset: 2px;
+}
+
+/* Animaciones suaves */
+.ant-modal-mask {
+  animation: fadeIn 0.3s ease-in-out;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
