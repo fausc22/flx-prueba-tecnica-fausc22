@@ -4,7 +4,9 @@
 */
 
 function reverseString(str) {
-  // Tu solución acá  
+
+    reverseString = str.split('').reverse().join(''); // Divido el string en un array, lo invierto y lo vuelvo a unir
+    return reverseString; // Devuelvo el string invertido
 }
 
 /*
@@ -12,8 +14,26 @@ function reverseString(str) {
   Escribe una función isPalindrome que tome una cadena como entrada 
   y devuelva true si la cadena es un palíndromo, y false en caso contrario.
 */
+
 function isPalindrome(str) {
-  // Tu solución acá
+  //Limpio el string para que tenga solo letras minusculas y numeros
+  const stringLimpio = str.toLowerCase().replace(/[^a-z0-9]/g, '');
+
+  //creo dos variables para guardar el inicio y el final del string
+  let izquierda = 0;
+  let derecha = stringLimpio.length - 1;
+
+  //recorro el string desde el principio y el final
+  while (izquierda < derecha) {
+    if (stringLimpio[izquierda] !== stringLimpio[derecha]) {
+      return false; // Si las letras no coinciden, no es un palíndromo y returna falso terminando el bucle
+    }
+    // Si las letras coinciden, sigo comparando
+    izquierda++;
+    derecha--;
+    
+  }
+    return true; // Si todas las letras coinciden, es un palíndromo y returna verdadero
 }
 
 /*
@@ -30,7 +50,30 @@ function isPalindrome(str) {
 */
 
 function closestPair(arr) {
-  // Tu solución acá
+    if (arr.length < 2) {
+        return null; // Si el array tiene menos de 2 elementos, no hay pares y devuelve null
+    }
+
+    const arrayOrdenado = arr.sort((a,b) => a - b); // Ordeno el array de menor a mayor asegurando que los numeros cercanos esten juntos
+    let diferenciaMinima = Infinity; // Inicializo la diferencia con un valor alto 
+    let parCercano = []; // Inicializalo el array que guarda la solucion
+
+    //Recorro el array ordenado y comparo la diferencia entre los elementos consecutivos
+    for (let i = 0; i < arrayOrdenado.length -1; i++){
+
+      // Calculo la diferencia entre el elemento actual y el siguiente
+        const numeroActual = arrayOrdenado[i];
+        const numeroSiguiente = arrayOrdenado[i + 1];
+
+        const diferencia = numeroSiguiente - numeroActual; //Como esta ordenado, la diferencia va a ser positiva 
+
+        if (diferencia < diferenciaMinima) {
+          diferenciaMinima = diferencia; // Si la diferencia es menor a la minima, actualizo la minima
+          parCercano = [numeroActual, numeroSiguiente]; // Actualizo el par cercano
+        }
+    }
+
+    return parCercano; // Devuelvo el par cercano
 }
 
 
@@ -67,8 +110,58 @@ function closestPair(arr) {
 */
 
 class Calculator {
-  // Tu solución acá
+  constructor() {
+    this.lastResult = null; // Inicializo el resultado en null
+  }
+
+  //suma
+  add(a, b) {
+    this.lastResult = a + b; // Actualizo el resultado
+    return this.lastResult; // Devuelvo el resultado
+  }
+
+  //resta
+  subtract(a, b) {
+    this.lastResult = a - b; // Actualizo el resultado
+    return this.lastResult; // Devuelvo el resultado
+  }
+
+  //multiplicacion
+  multiply(a, b) {
+    this.lastResult = a * b; // Actualizo el resultado
+    return this.lastResult; // Devuelvo el resultado
+  }
+
+  //division
+  divide(a, b) {
+    if (b === 0) {
+      throw new Error('Division by zero is not allowed'); // Si el divisor es cero, lanzo un error
+    }
+    this.lastResult = a / b; // Actualizo el resultado
+    return this.lastResult; // Devuelvo el resultado
+  }
+
+  //obtener el resultado de la ultima operacion
+  getLastResult() {
+    return this.lastResult; // Devuelvo el último resultado
+  }
 }
+
+Calculator.prototype.exponentiate = function(base, exponent) {
+  if (exponent < 0) {
+    throw new Error('Exponentiation with negative exponent is not allowed'); // Si el exponente es negativo, lanzo un error
+  }
+
+  if (exponent === 0) {
+    this.lastResult = 1; // Si el exponente es cero, el resultado es 1
+  } else {
+    this.lastResult = Math.pow(base, exponent); // Calculo la potencia
+  }
+
+  return this.lastResult; // Devuelvo el resultado
+};
+
+
 
 module.exports = {
   closestPair,
